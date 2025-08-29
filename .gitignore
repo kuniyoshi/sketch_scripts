@@ -4,4 +4,5 @@ sketch_scripts
 
 # Local Go build cache
 .gocache/
-
+.cache/
+.home/
