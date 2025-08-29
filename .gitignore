@@ -1,0 +1,7 @@
+# Build artifacts
+sketch_scripts
+*.exe
+
+# Local Go build cache
+.gocache/
+
