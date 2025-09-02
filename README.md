@@ -19,13 +19,12 @@ Quick start
 -----------
 
 - Build: `mkdir -p .gocache && GOCACHE=$PWD/.gocache go build -o sketch_scripts .`
-- Run: `./sketch_scripts -v` or `./sketch_scripts hello -name Alice`
-- List scripts in `sketches/`: `./sketch_scripts list -dir sketches`
+- Run: `./sketch_scripts`
 
-list command
-------------
+Behavior
+--------
 
-`list` は `sketches` ディレクトリ内の各スクリプトから、`SKETCH: {説明}` を含む行を抽出して
+カレントディレクトリの `sketches/` を走査し、各ファイルから `SKETCH: {説明}` を含む行を抽出して
 `<ファイル名>\t<説明>` 形式で表示します。説明が見つからない場合は `(no description)` を表示します。
 
 Notes
