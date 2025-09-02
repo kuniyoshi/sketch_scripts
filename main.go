@@ -40,7 +40,6 @@ func listSketches(dir string) error {
 	for _, path := range files {
 		desc, err := extractSketchDescription(path)
 		if err != nil {
-			// Non-fatal: show an error marker for this file
 			fmt.Printf("%s\t%s\n", filepath.Base(path), "(read error)")
 			continue
 		}
@@ -63,13 +62,13 @@ func extractSketchDescription(path string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	// Look for a line containing "SKETCH:" and return the rest of that line
 	const key = "SKETCH:"
 	for _, line := range strings.Split(string(data), "\n") {
 		if idx := strings.Index(line, key); idx != -1 {
 			// Take everything after the key
 			val := line[idx+len(key):]
-			// Trim common comment prefixes and whitespace
 			val = strings.TrimSpace(val)
 			return val, nil
 		}
