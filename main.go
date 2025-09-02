@@ -10,8 +10,9 @@ import (
 )
 
 func main() {
-	// Default behavior: list sketches in ./sketches
-	if err := listSketches("sketches"); err != nil {
+	err := listSketches("sketches")
+
+	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 		os.Exit(1)
 	}
