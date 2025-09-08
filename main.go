@@ -50,13 +50,15 @@ func listSketches(dir string) error {
 	for _, path := range files {
 		desc, err := extractSketchDescription(path)
 		if err != nil {
-			fmt.Printf("%-*s  %s\n", maxName, filepath.Base(path), "(read error)")
+			// Prefix the filename with a visual marker to distinguish it from wrapped descriptions
+			fmt.Printf("▌%-*s  %s\n", maxName, filepath.Base(path), "(read error)")
 			continue
 		}
 		if desc == "" {
 			desc = "(no description)"
 		}
-		fmt.Printf("%-*s  %s\n", maxName, filepath.Base(path), desc)
+		// Prefix the filename with a visual marker to distinguish it from wrapped descriptions
+		fmt.Printf("▌%-*s  %s\n", maxName, filepath.Base(path), desc)
 	}
 	return nil
 }
