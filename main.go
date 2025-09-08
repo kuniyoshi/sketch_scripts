@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"unicode/utf8"
 )
 
 func main() {
@@ -37,16 +38,25 @@ func listSketches(dir string) error {
 	}
 	sort.Strings(files)
 
+	// Determine the maximum filename width (in runes) for alignment
+	maxName := 0
+	for _, path := range files {
+		w := utf8.RuneCountInString(filepath.Base(path))
+		if w > maxName {
+			maxName = w
+		}
+	}
+
 	for _, path := range files {
 		desc, err := extractSketchDescription(path)
 		if err != nil {
-			fmt.Printf("%s\t%s\n", filepath.Base(path), "(read error)")
+			fmt.Printf("%-*s  %s\n", maxName, filepath.Base(path), "(read error)")
 			continue
 		}
 		if desc == "" {
 			desc = "(no description)"
 		}
-		fmt.Printf("%s\t%s\n", filepath.Base(path), desc)
+		fmt.Printf("%-*s  %s\n", maxName, filepath.Base(path), desc)
 	}
 	return nil
 }
