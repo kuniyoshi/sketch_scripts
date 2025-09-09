@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io"
 	"os"
@@ -11,7 +12,11 @@ import (
 )
 
 func main() {
-	err := listSketches("sketches")
+	// Allow directory to be specified via -dir option; default is "sketches".
+	dir := flag.String("dir", "sketches", "sketch files directory")
+	flag.Parse()
+
+	err := listSketches(*dir)
 
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
